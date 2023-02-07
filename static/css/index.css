@@ -1,0 +1,27 @@
+/* 公共样式 */
+* {
+	margin: 0;
+	padding: 0;
+}
+.clearflex:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+.box{
+	width: 1000px;
+	margin: 0 auto;
+}
+.banner{
+	margin-bottom: 30px;
+}
+.tips{
+	font-size: 5px;
+	color: red;
+}
+img{
+	width: 1000px;
+}
+.layui-nav{
+	margin-top: 0;
+}
