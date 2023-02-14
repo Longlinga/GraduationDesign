@@ -32,12 +32,11 @@
 			<div class="input">
                 {% if user.is_authenticated %}
 				    <form action="" class="layui-form" method="post">
-                    {% csrf_token %}
-					<div class="layui-form-item">
-					    <label class="layui-form-label">商品ID</label>
-						<div class="layui-input-block">
+                        {% csrf_token %}
+					    <div class="layui-form-item">
+					        <label class="layui-form-label">商品ID</label>
+						    <div class="layui-input-block">
 							<input type="text" name="jd_id" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
-
 					    </div>
 					</div>
 					<div class="layui-form-item">

@@ -35,7 +35,7 @@ def test(request):
         for x in myresult:
             update_time.append(x[0])
         mycursor.close()
-        return render(request, 'function/user_attention.html',{"time": update_time, "price": price, "title": test.d_titel})
+        return render(request, 'function/user_attention.html',{"time": update_time, "price": price, "title": test.d_titel,"id":jd_id.commodity_id})
     else:
         mes='您还没有关注任何商品'
         return render(request, 'function/user_attention.html',{"mes":mes})

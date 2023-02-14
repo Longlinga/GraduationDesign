@@ -29,9 +29,6 @@
 					</div>
 				</div>
 			</div>
-			<div class="test">
-				<canvas id="myChart" width="50" height="20"></canvas>
-			</div>
 		</div>
 	</body>
     <script>
@@ -56,28 +53,5 @@
 			    //,anim: 'updown' //切换动画方式
 			  });
 			});
-    </script>
-    <script>
-    var ctx = document.getElementById("myChart");
-    var myChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: {{time|safe}},
-            datasets: [{
-                label: '{{ title }}',
-                data: {{ price }},
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero:true
-                    }
-             }]
-            }
-        }
-    });
     </script>
 </html>
