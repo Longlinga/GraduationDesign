@@ -32,7 +32,7 @@ def select_id(request):
             price = []
             for x in myresult:
                 price.append(x[0])
-            # 查询对用商品表中time字段的前十条记录
+            # 查询对用商品表中time字段的后十条记录
             sql_time = "SELECT DATE_FORMAT( update_time, '%Y-%m-%d' ) FROM `{id}` ORDER BY update_time DESC LIMIT 10".format(id=jd_id)
             mycursor.execute(sql_time)
             myresult = mycursor.fetchall()
