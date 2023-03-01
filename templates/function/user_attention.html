@@ -2,11 +2,13 @@
 	<head>
 		<meta charset="utf-8">
 		<title>首页</title>
+
 		<link rel="stylesheet" href="../../static/css/layui.css">
 		<link rel="stylesheet" href="../../static/css/index.css">
+        <link rel="stylesheet" href="../../static/css/mobi.css">
         <link rel="stylesheet" href="../../static/css/table.css">
 		<script src="https://cdn.jsdelivr.net/npm/chart.js@4.2.0/dist/chart.umd.min.js"></script>
-        <link rel="stylesheet" href="https://unpkg.com/mobi.css/dist/mobi.min.css">
+
 		<script src="../../static/layui.js"></script>
 	</head>
 	<body>
@@ -37,18 +39,19 @@
                     <table class="layui-table" lay-filter="table_zh">
                         <thead>
                             <tr class="th-tr">
-                                <th lay-data="{field:'title',width:'700'}">关注的商品</th>
-                                <th lay-data="{field:'jiage',width:'95',sort:true}">价格</th>
-                                <th lay-data="{field:'caozuo',width:'200'}">操作</th>
+                                <th lay-data="{field:'title',width:'700',align:'center'}">关注的商品</th>
+                                <th lay-data="{field:'jiage',width:'95',sort:true,align:'center'}">价格</th>
+                                <th lay-data="{field:'caozuo',width:'200',align:'center'}">操作</th>
                             </tr>
                         </thead>
-                        {% for x in all_data %}
+                        {% for x,y in all_data.items %}
                             <tr role="row">
                                 <td><a>{{ x }}</a></td>
-                                <td>9999</td>
+                                <td>{{ y }}</td>
                                 <td>
                                     <form action="{% url 'users:attention' %}" method="post">
                                         {% csrf_token %}
+                                         <input type="submit" value="查看详情" class="layui-btn layui-btn-sm layui-btn">
                                         <input type="submit" value="取消关注" class="layui-btn layui-btn-sm layui-btn-danger">
                                     </form>
                                 </td>
@@ -58,7 +61,13 @@
                     </table>
 
                 {% else %}
-                    <p>你还没有登录，请<button class="btn btn-default"><a href="{% url 'login' %}?next={{ request.path }}">登录</a></button>或者<button class="btn btn-default"><a href="{% url 'users:register' %}">注册</a></button>
+                    <p>你还没有登录，请
+                        <button class="btn btn-default">
+                            <a href="{% url 'login' %}?next={{ request.path }}">登录</a>
+                        </button>或者
+                        <button class="btn btn-default">
+                            <a href="{% url 'users:register' %}">注册</a>
+                        </button>
                     </p>
                 {% endif %}
 			</div>
@@ -83,9 +92,10 @@
         var table = layui.table;
         //转换静态表格
         table.init('table_zh', {
-            limit: 5
-            ,page: true //开启分页
+            limit: 10 //默认采用10
+            ,page: true ,//开启分页
             //支持所有基础参数
+
         });
     </script>
 </html>
