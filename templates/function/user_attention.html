@@ -39,13 +39,15 @@
                     <table class="layui-table" lay-filter="table_zh">
                         <thead>
                             <tr class="th-tr">
-                                <th lay-data="{field:'title',width:'700',align:'center'}">关注的商品</th>
-                                <th lay-data="{field:'jiage',width:'95',sort:true,align:'center'}">价格</th>
-                                <th lay-data="{field:'caozuo',width:'200',align:'center'}">操作</th>
+                                <th lay-data="{field:'id',width:'20%',sort:true,align:'center'}">商品ID</th>
+                                <th lay-data="{field:'title',width:'50.3%',align:'center'}">关注的商品</th>
+                                <th lay-data="{field:'jiage',width:'10%',sort:true,align:'center'}">价格</th>
+                                <th lay-data="{field:'caozuo',width:'20%',align:'center'}">操作</th>
                             </tr>
                         </thead>
                         {% for x,y in all_data.items %}
                             <tr role="row">
+                                <td>testID</td>
                                 <td><a>{{ x }}</a></td>
                                 <td>{{ y }}</td>
                                 <td>

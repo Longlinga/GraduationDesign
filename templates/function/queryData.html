@@ -43,7 +43,7 @@
 					<div class="layui-form-item">
 					    <div class="layui-input-block">
 					      <button class="layui-btn" lay-submit lay-filter="formDemo" name="bt2">立即提交</button>
-					      <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+					      <button type="reset" class="layui-btn layui-btn-primary">清空</button>
 					    </div>
 					</div>
 				</form>
@@ -54,51 +54,44 @@
 		</div>
 	</body>
 <script>
-            //Django消息弹窗
-            {% if messages %}
-                {% for msg in messages %}
-                    alert('{{ msg.message }}');
-                {% endfor %}
-            {% endif %}
-            //加载element
-			layui.use('element', function(){
-			  var element = layui.element;
-
-			  //…
-			});
-            //加载carousel
-			layui.use('carousel', function(){
-			  var carousel = layui.carousel;
-			  //建造实例
-			  carousel.render({
-			    elem: '#test1'
-			    ,width: '100%' //设置容器宽度
-			    ,arrow: 'always' //始终显示箭头
-			    //,anim: 'updown' //切换动画方式
-			  });
-			});
+    //加载element
+    layui.use('element', function(){
+        var element = layui.element;
+        //…
+    });
+    //加载carousel
+    layui.use('carousel', function(){
+        var carousel = layui.carousel;
+        //建造实例
+        carousel.render({
+            elem: '#test1'
+            ,width: '100%' //设置容器宽度
+            ,arrow: 'always' //始终显示箭头
+            //,anim: 'updown' //切换动画方式
+        });
+    });
 </script>
 <script>
-var ctx = document.getElementById("myChart");
-var myChart = new Chart(ctx, {
-    type: 'line',
-    data: {
-        labels: {{time|safe}},
-        datasets: [{
-            label: '{{ title }}',
-            data: {{ price }},
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero:true
-                }
+    var ctx = document.getElementById("myChart");
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: {{time|safe}},
+            datasets: [{
+                label: '{{ title }}',
+                data: {{ price }},
+                borderWidth: 1
             }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true
+                    }
+                }]
+            }
         }
-    }
-});
+    });
 </script>
 </html>

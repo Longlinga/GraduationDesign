@@ -4,7 +4,7 @@
 		<title>添加数据</title>
 		<link rel="stylesheet" href="../../static/css/layui.css">
 		<link rel="stylesheet" href="../../static/css/index.css">
-	    <link rel="stylesheet" href="https://unpkg.com/mobi.css/dist/mobi.min.css">
+	    <link rel="stylesheet" href="../../static/css/mobi.css">
         <script src="../../static/layui.js"></script>
     </head>
 	<body>
@@ -36,7 +36,9 @@
 					    <div class="layui-form-item">
 					        <label class="layui-form-label">商品ID</label>
 						    <div class="layui-input-block">
-							<input type="text" name="jd_id" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+							<input type="text" name="jd_id" required  lay-verify="required" placeholder="请输入商品ID" autocomplete="off" class="layui-input">
+                                <div class="tips">{{ mes }}</div>
+                                <div class="tips">{{ mes_notfound }}</div>
 					    </div>
 					</div>
 					<div class="layui-form-item">
@@ -58,17 +60,9 @@
 			</div>
 		</div>
 		<script>
-            //Django消息弹窗
-            {% if messages %}
-                {% for msg in messages %}
-                    alert('{{ msg.message }}');
-                {% endfor %}
-            {% endif %}
             //加载element
 			layui.use('element', function(){
 			  var element = layui.element;
-				
-			  //…
 			});
             //加载carousel
 			layui.use('carousel', function(){
@@ -83,5 +77,4 @@
 			});
 		</script> 
 	</body>
-	
 </html>

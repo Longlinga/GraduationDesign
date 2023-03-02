@@ -25,7 +25,7 @@ def commodity_id1(request):
         print(jd_id)
         count = models.jd_data.objects.filter(id=jd_id).count()
         if count:
-            messages.info(request, '该商品ID已记录！已为您更新价格记录...')
+            mes='该商品ID已记录！已为您更新价格记录...'
             # 使用无界面模式
             options = webdriver.ChromeOptions()
             options.add_argument("--headless")
@@ -35,15 +35,19 @@ def commodity_id1(request):
             # driver = webdriver.Chrome()
 
             # 获取指定京东商品名称及价格
-            commodity_id = jd_id
-            driver.get(f'https://item.jd.com/{commodity_id}.html')
-            title = driver.find_element(by=By.CLASS_NAME, value='sku-name').text
-            price = driver.find_element(by=By.CLASS_NAME, value='price').text
-            server_time = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
-            driver.implicitly_wait(20)  # 隐式等待
-            print('商品名：' + title)
-            print('价格：' + price)
-            driver.quit()
+            try:
+                commodity_id = jd_id
+                driver.get(f'https://item.jd.com/{commodity_id}.html')
+                title = driver.find_element(by=By.CLASS_NAME, value='sku-name').text
+                price = driver.find_element(by=By.CLASS_NAME, value='price').text
+                server_time = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
+                driver.implicitly_wait(20)  # 隐式等待
+                print('商品名：' + title)
+                print('价格：' + price)
+                driver.quit()
+            except Exception as e:
+                mes_notfound= '未找到该商品ID或该商品以下架，请检查后重新输入！'
+                return render(request, 'function/addItem.html', {'mes_notfound':mes_notfound})
 
             # 写入数据库
             user_id=request.user.id
@@ -58,7 +62,7 @@ def commodity_id1(request):
             except Exception as e:
                 print(e)
             myc.close()
-            return render(request, 'function/addItem.html', {"title": title, "price": price})
+            return render(request, 'function/addItem.html', {"title": title, "price": price, "mes": mes})
             # return render(request, "function/addItem.html")
         else:
             # 使用无界面模式
@@ -70,15 +74,19 @@ def commodity_id1(request):
             # driver = webdriver.Chrome()
 
             # 获取指定京东商品名称及价格
-            commodity_id = jd_id
-            driver.get(f'https://item.jd.com/{commodity_id}.html')
-            title = driver.find_element(by=By.CLASS_NAME, value='sku-name').text
-            price = driver.find_element(by=By.CLASS_NAME, value='price').text
-            server_time = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
-            driver.implicitly_wait(20)  # 隐式等待
-            print('商品名：' + title)
-            print('价格：' + price)
-            driver.quit()
+            try:
+                commodity_id = jd_id
+                driver.get(f'https://item.jd.com/{commodity_id}.html')
+                title = driver.find_element(by=By.CLASS_NAME, value='sku-name').text
+                price = driver.find_element(by=By.CLASS_NAME, value='price').text
+                server_time = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
+                driver.implicitly_wait(20)  # 隐式等待
+                print('商品名：' + title)
+                print('价格：' + price)
+                driver.quit()
+            except Exception as e:
+                mes_notfound = '未找到该商品ID或该商品以下架，请检查后重新输入！'
+                return render(request, 'function/addItem.html', {'mes_notfound': mes_notfound})
 
             # 写入数据库
             user_id=request.user.id
