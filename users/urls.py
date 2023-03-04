@@ -9,6 +9,7 @@ urlpatterns = [
 
     path('register',views.register,name="register"),
     path('center',views.center,name="center"),
-    path('attention',user_attention.test,name="attention"),
+    path('attention',user_attention.follow,name="attention"),
+    path('details',user_attention.details,name="details"),
 
 ]

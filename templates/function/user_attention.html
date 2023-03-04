@@ -39,22 +39,22 @@
                     <table class="layui-table" lay-filter="table_zh">
                         <thead>
                             <tr class="th-tr">
-                                <th lay-data="{field:'id',width:'20%',sort:true,align:'center'}">商品ID</th>
-                                <th lay-data="{field:'title',width:'50.3%',align:'center'}">关注的商品</th>
-                                <th lay-data="{field:'jiage',width:'10%',sort:true,align:'center'}">价格</th>
+{#                                <th lay-data="{field:'id',width:'20%',align:'center'}">商品ID</th>#}
+                                <th lay-data="{field:'title',width:'15%',align:'center'}">商品ID</th>
+                                <th lay-data="{field:'jiage',width:'65%',sort:true,align:'center'}">商品名称</th>
                                 <th lay-data="{field:'caozuo',width:'20%',align:'center'}">操作</th>
                             </tr>
                         </thead>
                         {% for x,y in all_data.items %}
                             <tr role="row">
-                                <td>testID</td>
-                                <td><a>{{ x }}</a></td>
                                 <td>{{ y }}</td>
+                                <td>{{ x }}</td>
                                 <td>
-                                    <form action="{% url 'users:attention' %}" method="post">
+                                    <form action="{% url 'users:details' %}" method="post">
                                         {% csrf_token %}
-                                         <input type="submit" value="查看详情" class="layui-btn layui-btn-sm layui-btn">
-                                        <input type="submit" value="取消关注" class="layui-btn layui-btn-sm layui-btn-danger">
+                                        <input name="id" style="display: none" type="text" value="{{ y }}">
+                                        <input type="submit" value="查看详情" class="layui-btn layui-btn-sm layui-btn" name="details_bt">
+                                        <input type="submit" value="取消关注" class="layui-btn layui-btn-sm layui-btn-danger" name="del_bt">
                                     </form>
                                 </td>
 

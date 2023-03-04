@@ -21,6 +21,7 @@ from users import views
 from backgroundData import index
 from backgroundData import addData
 from backgroundData import queryData
+from backgroundData import cron_task
 
 urlpatterns = [
     path('favicon.ico',RedirectView.as_view(url=r'static/img/favicon.ico')),
@@ -28,6 +29,7 @@ urlpatterns = [
     path('',index.commodity_id, name="index"),
     path('add/',addData.commodity_id1, name="add"),
     path('query/',queryData.select_id, name="query"),
+    path('cron/',cron_task.cron_task, name="cron_task"),
 
 
     path('users/',include('users.urls')),
