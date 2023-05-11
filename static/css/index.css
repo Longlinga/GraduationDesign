@@ -58,6 +58,13 @@ img{
 	border-radius: 25px;
 	box-shadow: 5px 5px 5px #ccc;
 }
+.cicle-i-1 {
+	padding: 20px;
+	background-color: #fff;
+	border-radius: 25px;
+	box-shadow: 5px 5px 5px #ccc;
+}
+
 .layui-nav-item:nth-child(5){
 	float: right;
 }
@@ -75,4 +82,8 @@ body {
 	border-radius: 50%;
 	margin-right: 5px;
 	margin-left: 10px;
+}
+.cicle-i-1>div>p{
+	font-size: 30px;
+	text-align: center;
 }

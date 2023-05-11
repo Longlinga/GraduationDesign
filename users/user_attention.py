@@ -1,8 +1,13 @@
+from datetime import time
+
+import numpy as np
+import pandas as pd
 import pymysql
 
 from django.shortcuts import render
 from . import models
 from backgroundData import models
+from sklearn.linear_model import LinearRegression
 
 mydb = pymysql.connect(
     host="127.0.0.1",
@@ -68,6 +73,8 @@ def details(requset):
         print(id)
         test = models.jd_data.objects.filter(id=int(id)).first()
         title = test.d_titel
+
+        #图表数据获取
         # 查询对应商品表中price字段的后十条记录并倒序
         mycursor = priceDB.cursor()
         sql_price = "SELECT price FROM( SELECT * FROM `{id}` ORDER BY update_time DESC LIMIT 10) AS A ORDER BY update_time ASC".format(
@@ -86,7 +93,30 @@ def details(requset):
         for x in myresult:
             update_time.append(x[0])
         mycursor.close()
-        return render(requset, 'function/details.html', {"time": update_time, "price": price, "title": title})
+
+        # 价格预测
+        mycursor= priceDB.cursor()
+        sql_yuce="SELECT price,update_time FROM `{id}`".format(id=id)
+        mycursor.execute(sql_yuce)
+        myresult = mycursor.fetchall()
+        mycursor.close()
+        df= pd.DataFrame(list(myresult), columns=['price', 'update_time'])
+        # 创建线性回归模型
+        model = LinearRegression()
+        df['update_time'] = pd.to_datetime(df['update_time'])
+        df['update_time'] = df['update_time'].map(pd.Timestamp.timestamp)
+        # 将时间戳转换为二维数组
+        x = np.array(df['update_time']).reshape(-1, 1)
+        y = np.array(df['price']).reshape(-1, 1)
+        # 训练模型
+        model.fit(x, y)
+        # 预测当前时间的价格
+        y_predict = model.predict([[pd.Timestamp.now().timestamp()]])
+        #提取y_predict中的数字,并保留两位小数
+        y_predict = round(float(y_predict[0][0]),2)
+
+
+        return render(requset, 'function/details.html', {"time": update_time, "price": price, "title": title,"yuce":y_predict})
     elif 'del_bt' in requset.POST:
         id = requset.POST.get('id')
         user_id = requset.user.id
