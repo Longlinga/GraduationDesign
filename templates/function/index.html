@@ -11,24 +11,52 @@
 		<div class="box">
 			<div class="box_head clearflex">
 				<ul class="layui-nav" lay-filter="">
-					<li class="layui-nav-item layui-this"><a href="{% url 'index' %}">首页</a></li>
-				    <li class="layui-nav-item"><a href="{% url 'add' %}">添加商品</a></li>
-					<li class="layui-nav-item"><a href="{% url 'query' %}">查询商品</a></li>
-					<li class="layui-nav-item"><a href="{% url 'users:attention' %}">我的关注</a></li>
-					<li class="layui-nav-item"><a href="{% url 'users:center' %}">个人信息</a></li>
+					<li class="layui-nav-item layui-this"><a href="{% url 'index' %}"><i class="layui-icon layui-icon-home"></i>&nbsp;&nbsp;首页</a></li>
+				    <li class="layui-nav-item"><a href="{% url 'add' %}"><i class="layui-icon layui-icon-add-1"></i>&nbsp;&nbsp;添加商品</a></li>
+					<li class="layui-nav-item"><a href="{% url 'query' %}"><i class="layui-icon layui-icon-search"></i>&nbsp;&nbsp;查询商品</a></li>
+                    <li class="layui-nav-item"><a href="{% url 'users:attention' %}"><i class="layui-icon layui-icon-rate"></i>&nbsp;&nbsp;我的关注</a></li>
+                    <li class="layui-nav-item">
+                        <a href="javascript:;">&nbsp;&nbsp;我的<img src="../../static/img/森罗.jpg" class="toux clearflex"></a>
+                        <dl class="layui-nav-child"> <!-- 二级菜单 -->
+                            <dd><a href="{% url 'login' %}?next={{ request.path }}"><i class="layui-icon layui-icon-release"></i>&nbsp;&nbsp;用户登陆</a></dd>
+                            <dd><a href="http://127.0.0.1:8000/admin/"><i class="layui-icon layui-icon-console"></i>&nbsp;&nbsp;管理员登陆</a></dd>
+                            <dd><a href="{% url 'users:center' %}"><i class="layui-icon layui-icon-username"></i>&nbsp;&nbsp;个人信息</a></dd>
+                            <dd><a href="{% url 'logout' %}?next={{ request.path }}"><i class="layui-icon layui-icon-close"></i>&nbsp;&nbsp;登出</a></dd>
+                        </dl>
+                    </li>
 				</ul>
 			</div>
 			<div class="banner">
 				<div class="layui-carousel" id="test1">
 					<div carousel-item>
-						<div><img src="../../static/img/3.png" alt="" width="100%"></div>
-						<div><img src="../../static/img/3.png" alt="" width="100%"></div>
-						<div><img src="../../static/img/3.png" alt="" width="100%"></div>
-						<div><img src="../../static/img/3.png" alt="" width="100%"></div>
-						<div><img src="../../static/img/3.png" alt="" width="100%"></div>
+						<div><img src="../../static/img/banner1.png" alt="" width="100%"></div>
+						<div><img src="../../static/img/banner2.jpg" alt="" width="100%"></div>
+						<div><img src="../../static/img/banner3.jpg" alt="" width="100%"></div>
+						<div><img src="../../static/img/banner4.jpg" alt="" width="100%"></div>
+						<div><img src="../../static/img/banner5.jpg" alt="" width="100%"></div>
 					</div>
 				</div>
 			</div>
+            <div>
+                <div class="background clearflex" >
+                    <div class="cicle-i">
+                        <div><canvas id="myChart"></canvas></div>
+                    </div>
+                     <div class="cicle-i">
+                        <div><canvas id="myChart2"></canvas></div>
+                    </div>
+                    <div class="cicle-i">
+                        <div>
+                            <canvas id="myChart3"></canvas>
+                        </div>
+
+                    </div>
+                    <div class="cicle-i">
+                        <div><canvas id="myChart4"></canvas></div>
+                    </div>
+                </div>
+
+            </div>
 		</div>
 	</body>
     <script>
@@ -54,4 +82,97 @@
 			  });
 			});
     </script>
+<script>
+    {#第一个图表#}
+    var ctx = document.getElementById("myChart");
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: {{time|safe}},
+            datasets: [{
+                label: '{{ title }}',
+                data: {{ price }},
+                borderWidth: 1,
+                tension: 0.4
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true
+                    }
+                }]
+            }
+        }
+    });
+    {##第二个图表#}
+    var ctx2 = document.getElementById("myChart2");
+    var myChart2 = new Chart(ctx2, {
+        type: 'bar',
+        data: {
+            labels: {{time|safe}},
+            datasets: [{
+                label: '订阅价格排行',
+                data: {{ max_10 }},
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true
+                    }
+                }]
+            }
+        }
+    });
+    {##第三个图表#}
+    var ctx3 = document.getElementById("myChart3");
+    var myChart3 = new Chart(ctx3, {
+        type: 'doughnut',
+        data: {
+            labels: ["当前商品订阅数"],
+            datasets: [{
+                data: {{ dingyueSL }},
+                borderWidth: 1
+            }]
+        },
+        backgroundColor: [
+            'rgba(255, 99, 132, 0.2)'
+        ],
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true
+                    }
+                }]
+            }
+        }
+    });
+    {##第四个图表#}
+    var ctx4 = document.getElementById("myChart4");
+    var myChart4 = new Chart(ctx4, {
+        type: 'radar',
+        data: {
+            labels: {{time|safe}},
+            datasets: [{
+                label: '{{ title }}',
+                data: {{ price }},
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true
+                    }
+                }]
+            }
+        }
+    });
+</script>
 </html>

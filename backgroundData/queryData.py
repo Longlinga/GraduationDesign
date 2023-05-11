@@ -26,14 +26,14 @@ def select_id(request):
             title = test.d_titel
             # 查询对应商品表中price字段的后十条记录并倒序
             mycursor = mydb.cursor()
-            sql_price = "SELECT price FROM( SELECT * FROM `{id}` ORDER BY update_time DESC) AS A ORDER BY update_time ASC".format(id=jd_id)
+            sql_price = "SELECT price FROM( SELECT * FROM `{id}` ORDER BY update_time DESC LIMIT 30) AS A ORDER BY update_time ASC".format(id=jd_id)
             mycursor.execute(sql_price)
             myresult = mycursor.fetchall()
             price = []
             for x in myresult:
                 price.append(x[0])
             # 查询对用商品表中time字段的后十条记录
-            sql_time = "SELECT DATE_FORMAT( update_time, '%Y-%m-%d' ) FROM ( SELECT * FROM `{id}` ORDER BY update_time DESC) as A ORDER BY update_time ASC".format(id=jd_id)
+            sql_time = "SELECT DATE_FORMAT( update_time, '%Y-%m-%d' ) FROM ( SELECT * FROM `{id}` ORDER BY update_time DESC LIMIT 30) as A ORDER BY update_time ASC".format(id=jd_id)
             mycursor.execute(sql_time)
             myresult = mycursor.fetchall()
             update_time = []

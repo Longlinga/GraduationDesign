@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'backgroundData.apps.BackgrounddataConfig',
     'users',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [

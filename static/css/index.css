@@ -9,8 +9,9 @@
     clear: both;
 }
 .box{
-	width: 1000px;
+	width: 1200px;
 	margin: 0 auto;
+	background-color: #f6f8fe;
 }
 .banner{
 	margin-bottom: 30px;
@@ -20,8 +21,58 @@
 	color: red;
 }
 img{
-	width: 1000px;
+	width: 1200px;
 }
 .layui-nav{
 	margin-top: 0;
+}
+.background {
+	display: grid;
+	grid-template-columns: repeat(2,1fr);
+	/*background: #00F7DE;*/
+	/*background-image: url(../img/89f5a603b9574c0694c1b296d924f76b.gif);*/
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	padding: 30px 15px;
+	gap: 100px 80px;
+}
+.myChart {
+	width: 500px;
+	height: 100%;
+}
+.myChart2 {
+	width: 500px;
+	height: 100%;
+}
+.myChart3 {
+	width: 500px;
+	height: 100%;
+}
+.myChart4 {
+	width: 500px;
+	height: 100%;
+}
+.cicle-i {
+	padding: 20px;
+	background-color: #fff;
+	border-radius: 25px;
+	box-shadow: 5px 5px 5px #ccc;
+}
+.layui-nav-item:nth-child(5){
+	float: right;
+}
+body {
+	background-color: #dee2e6;
+}
+
+.layui-carousel>[carousel-item] {
+	border-bottom-left-radius: 25px;
+	border-bottom-right-radius: 25px;
+}
+.toux{
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	margin-right: 5px;
+	margin-left: 10px;
 }

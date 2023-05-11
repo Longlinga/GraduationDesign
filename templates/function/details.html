@@ -12,22 +12,32 @@
 		<div class="box">
 			<div class="box_head clearflex">
 				<ul class="layui-nav" lay-filter="">
-				  <li class="layui-nav-item"><a href="{% url 'index' %}">首页</a></li>
-				  <li class="layui-nav-item"><a href="{% url 'add' %}">添加商品</a></li>
-				  <li class="layui-nav-item"><a href="{% url 'query' %}">查询商品</a></li>
-				  <li class="layui-nav-item layui-this"><a href="{% url 'users:attention' %}">我的关注</a></li>
-				  <li class="layui-nav-item"><a href="{% url 'users:center' %}">个人信息</a></li>
+					<li class="layui-nav-item"><a href="{% url 'index' %}"><i class="layui-icon layui-icon-home"></i>&nbsp;&nbsp;首页</a></li>
+				    <li class="layui-nav-item"><a href="{% url 'add' %}"><i class="layui-icon layui-icon-add-1"></i>&nbsp;&nbsp;添加商品</a></li>
+					<li class="layui-nav-item"><a href="{% url 'query' %}"><i class="layui-icon layui-icon-search"></i>&nbsp;&nbsp;查询商品</a></li>
+                    <li class="layui-nav-item layui-this"><a href="{% url 'users:attention' %}"><i class="layui-icon layui-icon-rate"></i>&nbsp;&nbsp;我的关注</a></li>
+
+                     <li class="layui-nav-item">
+                        <a href="javascript:;">&nbsp;&nbsp;我的<img src="../../static/img/森罗.jpg" class="toux clearflex"></a>
+
+                        <dl class="layui-nav-child"> <!-- 二级菜单 -->
+                            <dd><a href="{% url 'login' %}?next={{ request.path }}"><i class="layui-icon layui-icon-release"></i>&nbsp;&nbsp;用户登陆</a></dd>
+                            <dd><a href="http://127.0.0.1:8000/admin/"><i class="layui-icon layui-icon-console"></i>&nbsp;&nbsp;管理员登陆</a></dd>
+                            <dd><a href="{% url 'users:center' %}"><i class="layui-icon layui-icon-username"></i>&nbsp;&nbsp;个人信息</a></dd>
+                            <dd><a href="{% url 'logout' %}?next={{ request.path }}"><i class="layui-icon layui-icon-close"></i>&nbsp;&nbsp;登出</a></dd>
+                        </dl>
+                    </li>
 				</ul>
 			</div>
 			<div class="banner">
 				<div class="layui-carousel" id="test1">
-				  <div carousel-item>
-				    <div><img src="../../static/img/3.png" alt="" width="100%"></div>
-				    <div><img src="../../static/img/3.png" alt="" width="100%"></div>
-				    <div><img src="../../static/img/3.png" alt="" width="100%"></div>
-				    <div><img src="../../static/img/3.png" alt="" width="100%"></div>
-				    <div><img src="../../static/img/3.png" alt="" width="100%"></div>
-				  </div>
+					<div carousel-item>
+						<div><img src="../../static/img/banner1.png" alt="" width="100%"></div>
+						<div><img src="../../static/img/banner2.jpg" alt="" width="100%"></div>
+						<div><img src="../../static/img/banner3.jpg" alt="" width="100%"></div>
+						<div><img src="../../static/img/banner4.jpg" alt="" width="100%"></div>
+						<div><img src="../../static/img/banner5.jpg" alt="" width="100%"></div>
+					</div>
 				</div>
 			</div>
 			<div class="input">
@@ -63,7 +73,8 @@
             datasets: [{
                 label: '{{ title }}',
                 data: {{ price }},
-                borderWidth: 1
+                borderWidth: 1,
+                tension: 0.4
             }]
         },
         options: {

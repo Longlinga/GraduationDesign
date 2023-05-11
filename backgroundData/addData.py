@@ -40,7 +40,10 @@ def commodity_id1(request):
                 title = driver.find_element(by=By.CLASS_NAME, value='sku-name').text
                 price = driver.find_element(by=By.CLASS_NAME, value='price').text
                 server_time = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
-                driver.implicitly_wait(20)  # 隐式等待
+                # driver.implicitly_wait(20)  # 隐式等待
+                time.sleep(5)
+                if price =="":
+                    price = driver.find_element(by=By.CLASS_NAME, value='price').text
                 print('商品名：' + title)
                 print('价格：' + price)
                 driver.quit()
@@ -79,7 +82,11 @@ def commodity_id1(request):
                 title = driver.find_element(by=By.CLASS_NAME, value='sku-name').text
                 price = driver.find_element(by=By.CLASS_NAME, value='price').text
                 server_time = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
-                driver.implicitly_wait(20)  # 隐式等待
+                # driver.implicitly_wait(20)  # 隐式等待
+                #等待5s
+                time.sleep(5)
+                if price =="":
+                    price = driver.find_element(by=By.CLASS_NAME, value='price').text
                 print('商品名：' + title)
                 print('价格：' + price)
                 driver.quit()
