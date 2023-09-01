@@ -20,6 +20,11 @@ def select_id(request):
     if request.method == 'GET' and 'bt2' in request.GET:
         jd_id = request.GET.get('select_id')
         print(jd_id)
+        # 判断jd_id是否为链接
+        if jd_id.find('https://item.jd.com/') != -1:
+            # 提取其中。html前面的数字
+            jd_id = jd_id.split('/')[-1].split('.')[0]
+            print(jd_id)
         count = models.jd_data.objects.filter(id=jd_id).count()
         if count:#如果存在
             test = models.jd_data.objects.filter(id=int(jd_id)).first()

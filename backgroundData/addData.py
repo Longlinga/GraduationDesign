@@ -22,6 +22,11 @@ def commodity_id1(request):
         # 获取用户指定京东商品id
         jd_id = request.POST.get('jd_id')
         print(jd_id)
+        #判断jd_id是否为链接
+        if jd_id.find('https://item.jd.com/') != -1:
+            # 提取其中。html前面的数字
+            jd_id = jd_id.split('/')[-1].split('.')[0]
+            print(jd_id)
         count = models.jd_data.objects.filter(id=jd_id).count()
         if count:
             mes='该商品ID已记录！已为您更新价格记录...'
